@@ -5,7 +5,7 @@ import com.revature.model.Status;
 
 import java.util.ArrayList;
 
-public class ReimbursementDAOImpl implements ReimbursementDAO{
+public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public ArrayList<Reimbursement> getAllReimbursements() {
