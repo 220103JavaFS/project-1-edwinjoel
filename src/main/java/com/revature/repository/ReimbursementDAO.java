@@ -1,28 +1,29 @@
 package com.revature.repository;
 
 import com.revature.model.Reimbursement;
+import com.revature.model.ReimbursementDTO;
 import com.revature.model.Status;
 
 import java.util.ArrayList;
 
 public interface ReimbursementDAO {
     //get all tickets reimbursements
-    ArrayList<Reimbursement> getAllReimbursements();
+    ArrayList<ReimbursementDTO> getAllReimbursements();
 
     //get all tickets reimbursements by author
-    ArrayList<Reimbursement> getAllReimbursementsByAuthor(int authorUserId);
+    ArrayList<ReimbursementDTO> getAllReimbursementsByAuthor(int authorUserId);
 
     //get all tickets reimbursements by resolver (manager)
-    ArrayList<Reimbursement> getAllReimbursementsByResolver(int resolverUserId);
+    ArrayList<ReimbursementDTO> getAllReimbursementsByResolver(int resolverUserId);
 
     //filter the reimbursement by status (manager)
-    ArrayList<Reimbursement> getAllReimbursementsByStatus(Status status);
+    ArrayList<ReimbursementDTO> getAllReimbursementsByStatus(Status status);
 
-    Reimbursement getReimbursementById(int reimbId);
+    ReimbursementDTO getReimbursementById(int reimbId);
 
-    boolean updateReimbursement(Reimbursement reimbursement);
+    boolean updateReimbursement(ReimbursementDTO reimbursement);
 
-    boolean addReimbursement(Reimbursement reimbursement);
+    boolean addReimbursement(ReimbursementDTO reimbursement);
 
     boolean deleteReimbursement(int reimbId);
 }

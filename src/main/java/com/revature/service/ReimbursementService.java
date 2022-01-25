@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import com.revature.model.Reimbursement;
+import com.revature.model.ReimbursementDTO;
 import com.revature.model.Status;
 import com.revature.repository.ReimbursementDAO;
 import com.revature.repository.ReimbursementDAOImpl;
@@ -17,36 +18,36 @@ public class ReimbursementService {
         this.reimbursementDAO = reimbursementDAO;
     }
 
-    public ArrayList<Reimbursement> getAllReimbursements(){
+    public ArrayList<ReimbursementDTO> getAllReimbursements(){
         return reimbursementDAO.getAllReimbursements();
     }
 
-    public ArrayList<Reimbursement> getAllReimbursementsByAuthor(int authorUserId){
+    public ArrayList<ReimbursementDTO> getAllReimbursementsByAuthor(int authorUserId){
         return reimbursementDAO.getAllReimbursementsByAuthor(authorUserId);
     }
 
-    public ArrayList<Reimbursement> getAllReimbursementsByResolver(int resolverUserId){
+    public ArrayList<ReimbursementDTO> getAllReimbursementsByResolver(int resolverUserId){
         return reimbursementDAO.getAllReimbursementsByResolver(resolverUserId);
     }
 
-    public ArrayList<Reimbursement> getAllReimbursementsByStatus(Status status){
+    public ArrayList<ReimbursementDTO> getAllReimbursementsByStatus(Status status){
         return reimbursementDAO.getAllReimbursementsByStatus(status);
     }
 
-    public Reimbursement getReimbursementById(int reimbId){
+    public ReimbursementDTO getReimbursementById(int reimbId){
         return reimbursementDAO.getReimbursementById(reimbId);
     }
 
-    public boolean updateReimbursement(Reimbursement reimbursement){
-        return true;
+    public boolean updateReimbursement(ReimbursementDTO reimbursement){
+        return reimbursementDAO.updateReimbursement(reimbursement);
     }
 
-    public boolean addReimbursement(Reimbursement reimbursement){
-        return true;
+    public boolean addReimbursement(ReimbursementDTO reimbursement){
+        return reimbursementDAO.addReimbursement(reimbursement);
     }
 
     public boolean deleteReimbursement(int reimbId){
-        return true;
+        return reimbursementDAO.deleteReimbursement(reimbId);
     }
 
 }
