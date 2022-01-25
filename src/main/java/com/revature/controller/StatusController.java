@@ -1,4 +1,4 @@
 package com.revature.controller;
 
-public class StatusController {
+public class StatusController{
 }
