@@ -2,13 +2,19 @@ package com.revature.model;
 
 public class Type {
     private int typeId;
-    private String type;
+    private Type.State type;
+    public enum State{
+        LODGING,
+        TRAVEL,
+        FOOD,
+        OTHER
+    }
 
     //TODO: Make into Enum class
     public Type() {
     }
 
-    public Type(int typeId, String type) {
+    public Type(int typeId, State type) {
         this.typeId = typeId;
         this.type = type;
     }
@@ -21,11 +27,11 @@ public class Type {
         this.typeId = typeId;
     }
 
-    public String getType() {
+    public State getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(State type) {
         this.type = type;
     }
 }

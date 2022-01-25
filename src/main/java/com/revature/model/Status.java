@@ -2,11 +2,11 @@ package com.revature.model;
 
 public class Status {
     private int statusId;
-    private State status;
+    private Status.State status;
     public enum State {
         APPROVED,
         PENDING,
-        DENIED;
+        DENIED
     }
 
 

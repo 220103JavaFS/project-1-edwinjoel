@@ -2,8 +2,9 @@ package com.revature.model;
 
 public class UserRole {
     private int userRoleId;
+    private UserRole.Role role;
 
-    public enum userRole {
+    public enum Role {
         EMPLOYEE,
         MANAGER;
     }
@@ -12,8 +13,9 @@ public class UserRole {
     public UserRole() {
     }
 
-    public UserRole(int userRoleId) {
+    public UserRole(int userRoleId, Role role) {
         this.userRoleId = userRoleId;
+        this.role = role;
     }
 
     public int getUserRoleId() {
@@ -24,8 +26,13 @@ public class UserRole {
         this.userRoleId = userRoleId;
     }
 
+    public Role getRole() {
+        return role;
+    }
 
-
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
 
 
