@@ -4,6 +4,7 @@ public class User {
 
     private int userId;
     private String username;
+    private byte[] hash;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,16 +13,15 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String username, String firstName, String lastName, String email, UserRole role) {
+    public User(int userId, String username, byte[] hash, String firstName, String lastName, String email, UserRole role) {
         this.userId = userId;
         this.username = username;
+        this.hash = hash;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
     }
-
-
 
     public int getUserId() {
         return userId;
@@ -69,5 +69,13 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public byte[] getHash() {
+        return hash;
+    }
+
+    public void setHash(byte[] hash) {
+        this.hash = hash;
     }
 }

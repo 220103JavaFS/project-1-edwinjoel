@@ -16,7 +16,8 @@ public class LoginService {
     }
 
     public User login(String username, String password){
-        return null;
+        //TODO: check to see that the password hashed matches the stored hash
+        return userDAO.getUser(username);
     }
 
 
