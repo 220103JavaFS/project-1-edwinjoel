@@ -23,7 +23,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     }
 
     @Override
-    public ArrayList<Reimbursement> getAllReimbursementsByStatus(Status.State status) {
+    public ArrayList<Reimbursement> getAllReimbursementsByStatus(Status status) {
         return null;
     }
 

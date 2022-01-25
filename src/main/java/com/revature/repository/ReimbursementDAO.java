@@ -16,7 +16,7 @@ public interface ReimbursementDAO {
     ArrayList<Reimbursement> getAllReimbursementsByResolver(int resolverUserId);
 
     //filter the reimbursement by status (manager)
-    ArrayList<Reimbursement> getAllReimbursementsByStatus(Status.State status);
+    ArrayList<Reimbursement> getAllReimbursementsByStatus(Status status);
 
     Reimbursement getReimbursementById(int reimbId);
 

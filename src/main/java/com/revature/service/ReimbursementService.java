@@ -29,7 +29,7 @@ public class ReimbursementService {
         return reimbursementDAO.getAllReimbursementsByResolver(resolverUserId);
     }
 
-    public ArrayList<Reimbursement> getAllReimbursementsByStatus(Status.State status){
+    public ArrayList<Reimbursement> getAllReimbursementsByStatus(Status status){
         return reimbursementDAO.getAllReimbursementsByStatus(status);
     }
 
