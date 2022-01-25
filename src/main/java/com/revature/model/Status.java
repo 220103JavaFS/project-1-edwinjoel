@@ -2,8 +2,8 @@ package com.revature.model;
 
 public class Status {
     private int statusId;
-    private statusStatus status;
-    public enum statusStatus {
+    private State status;
+    public enum State {
         APPROVED,
         PENDING,
         DENIED;
@@ -14,7 +14,7 @@ public class Status {
     public Status() {
     }
 
-    public Status(int statusId, statusStatus status) {
+    public Status(int statusId, State status) {
         this.statusId = statusId;
         this.status = status;
     }
@@ -27,11 +27,11 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public statusStatus getStatus() {
+    public State getStatus() {
         return status;
     }
 
-    public void setStatus(statusStatus status) {
+    public void setStatus(State status) {
         this.status = status;
     }
 }
