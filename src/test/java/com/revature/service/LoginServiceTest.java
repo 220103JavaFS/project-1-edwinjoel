@@ -69,14 +69,12 @@ public class LoginServiceTest {
 
     @Test void testLoginFailUsername(){
         User user = testService.login("Notjsmith1", "password");
-        assertNotEquals("Joe", user.getFirstName());
-        assertNotEquals("Smith", user.getLastName());
+        assertNull(user);
     }
 
     @Test void testLoginFailBoth(){
         User user = testService.login("Notjsmith1", "wrongpassword");
-        assertNotEquals("Joe", user.getFirstName());
-        assertNotEquals("Smith", user.getLastName());
+        assertNull(user);
     }
 
 }
