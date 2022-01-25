@@ -1,7 +1,7 @@
 package com.revature.model;
 
 public enum Status {
-        APPROVED,
         PENDING,
+        APPROVED,
         DENIED
 }
