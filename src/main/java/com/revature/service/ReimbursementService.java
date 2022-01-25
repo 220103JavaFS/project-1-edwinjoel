@@ -38,8 +38,8 @@ public class ReimbursementService {
         return reimbursementDAO.getReimbursementById(reimbId);
     }
 
-    public boolean updateReimbursement(ReimbursementDTO reimbursement){
-        return reimbursementDAO.updateReimbursement(reimbursement);
+    public boolean updateReimbursement(ReimbursementDTO reimbursement, int reimbId){
+        return reimbursementDAO.updateReimbursement(reimbursement, reimbId);
     }
 
     public boolean addReimbursement(ReimbursementDTO reimbursement){

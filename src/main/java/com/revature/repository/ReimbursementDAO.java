@@ -21,7 +21,7 @@ public interface ReimbursementDAO {
 
     ReimbursementDTO getReimbursementById(int reimbId);
 
-    boolean updateReimbursement(ReimbursementDTO reimbursement);
+    boolean updateReimbursement(ReimbursementDTO reimbursement, int reimbId);
 
     boolean addReimbursement(ReimbursementDTO reimbursement);
 

@@ -34,7 +34,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     }
 
     @Override
-    public boolean updateReimbursement(ReimbursementDTO reimbursement) {
+    public boolean updateReimbursement(ReimbursementDTO reimbursement, int reimbId) {
         return false;
     }
 
