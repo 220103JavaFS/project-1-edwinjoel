@@ -2,14 +2,18 @@ package com.revature.model;
 
 public class UserRole {
     private int userRoleId;
-    private String userRole;
 
+    public enum userRole {
+        EMPLOYEE,
+        MANAGER;
+    }
+
+    //TODO: Make into Enum class
     public UserRole() {
     }
 
-    public UserRole(int userRoleId, String userRole) {
+    public UserRole(int userRoleId) {
         this.userRoleId = userRoleId;
-        this.userRole = userRole;
     }
 
     public int getUserRoleId() {
@@ -20,11 +24,8 @@ public class UserRole {
         this.userRoleId = userRoleId;
     }
 
-    public String getUserRole() {
-        return userRole;
-    }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
+
 }
+
+

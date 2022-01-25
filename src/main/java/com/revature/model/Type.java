@@ -4,6 +4,7 @@ public class Type {
     private int typeId;
     private String type;
 
+    //TODO: Make into Enum class
     public Type() {
     }
 

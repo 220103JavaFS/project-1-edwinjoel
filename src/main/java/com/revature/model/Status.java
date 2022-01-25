@@ -2,12 +2,19 @@ package com.revature.model;
 
 public class Status {
     private int statusId;
-    private String status;
+    private statusStatus status;
+    public enum statusStatus {
+        APPROVED,
+        PENDING,
+        DENIED;
+    }
 
+
+    //TODO: Make into Enum class
     public Status() {
     }
 
-    public Status(int statusId, String status) {
+    public Status(int statusId, statusStatus status) {
         this.statusId = statusId;
         this.status = status;
     }
@@ -20,11 +27,11 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public String getStatus() {
+    public statusStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(statusStatus status) {
         this.status = status;
     }
 }
