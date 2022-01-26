@@ -22,7 +22,7 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateUser(User user, int userId) {
         return false;
     }
 
