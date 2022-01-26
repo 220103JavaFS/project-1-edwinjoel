@@ -42,8 +42,8 @@ public class LoginServiceTest {
         } catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }
-        byte[] passwordHash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
-        testUser.setHash(passwordHash);
+        byte[] hash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+        testUser.setHash(hash);
 
         MockitoAnnotations.openMocks(this);
         testService = new LoginService(testDAO);
@@ -63,8 +63,7 @@ public class LoginServiceTest {
 
     @Test void testLoginFailPassword(){
         User user = testService.login("jsmith1", "wrongpassword");
-        assertNotEquals("Joe", user.getFirstName());
-        assertNotEquals("Smith", user.getLastName());
+        assertNull(user);
     }
 
     @Test void testLoginFailUsername(){

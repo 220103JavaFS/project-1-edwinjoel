@@ -10,9 +10,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReimbursementServiceTest {
 
@@ -57,7 +57,42 @@ public class ReimbursementServiceTest {
 
     @Test
     public void testGetReimbursementFail(){
-        ReimbursementDTO reimb = testDAO.getReimbursementById(24);
+        ReimbursementDTO reimb = testDAO.getReimbursementById(60000);
         assertNull(reimb);
     }
+
+    @Test
+    public void testGetReimbursementNegativeAndZero(){
+        ReimbursementDTO reimb = testDAO.getReimbursementById(-1000);
+        assertNull(reimb);
+        ReimbursementDTO reimb2 = testDAO.getReimbursementById(0);
+        assertNull(reimb2);
+
+        ArrayList<ReimbursementDTO> reimbList = testDAO.getAllReimbursementsByAuthor(-1000);
+        assertEquals(0, reimbList.size());
+        ArrayList<ReimbursementDTO> reimbList2 = testDAO.getAllReimbursementsByAuthor(0);
+        assertEquals(0, reimbList2.size());
+
+        ArrayList<ReimbursementDTO> reimbList3 = testDAO.getAllReimbursementsByResolver(-1000);
+        assertEquals(0, reimbList3.size());
+        ArrayList<ReimbursementDTO> reimbList4= testDAO.getAllReimbursementsByResolver(0);
+        assertEquals(0, reimbList4.size());
+
+    }
+
+    @Test
+    public void testGetReimbursementByStatusNull(){
+        ArrayList<ReimbursementDTO> reimbList = testDAO.getAllReimbursementsByStatus(null);
+        assertEquals(0, reimbList.size());
+    }
+
+    @Test
+    public void testDeleteReimbursementNegativeZero(){
+        boolean result = testDAO.deleteReimbursement(-1000);
+        assertFalse(result);
+        boolean result2 = testDAO.deleteReimbursement(0);
+        assertFalse(result2);
+    }
+
+
 }
