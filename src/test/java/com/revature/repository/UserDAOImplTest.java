@@ -40,13 +40,15 @@ public class UserDAOImplTest {
     @Test
     @Order(2)
     void testGetUser(){
-        assertEquals(testUser, userDAO.getUser(testUser.getUsername()));
+        assertNotNull(userDAO.getUser(testUser.getUsername()));
+        assertEquals(testUser.getUsername(), userDAO.getUser(testUser.getUsername()).getUsername());
     }
 
     @Test
     @Order(3)
     void testGetUserById(){
-        assertEquals(testUser, userDAO.getUserById(testUser.getUserId()));
+        assertNotNull(userDAO.getUser(testUser.getUsername()));
+        assertEquals(testUser.getUsername(), userDAO.getUserById(testUser.getUserId()).getUsername());
     }
 
     @Test
