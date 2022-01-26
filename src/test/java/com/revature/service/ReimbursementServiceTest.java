@@ -59,7 +59,7 @@ public class ReimbursementServiceTest {
 
     @Test
     public void testGetReimbursementFail(){
-        ReimbursementDTO reimb = testDAO.getReimbursementById(24);
+        ReimbursementDTO reimb = testDAO.getReimbursementById(60000);
         assertNull(reimb);
     }
 }

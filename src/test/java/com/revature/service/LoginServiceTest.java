@@ -34,16 +34,7 @@ public class LoginServiceTest {
         testUser.setLastName("Smtih");
         testUser.setUsername("jsmith1");
         testUser.setRole(UserRole.EMPLOYEE);
-
-        String password = "password";
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        }
-        byte[] passwordHash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
-        testUser.setHash(passwordHash);
+        testUser.setHash("password".getBytes(StandardCharsets.UTF_8));
 
         MockitoAnnotations.openMocks(this);
         testService = new LoginService(testDAO);
