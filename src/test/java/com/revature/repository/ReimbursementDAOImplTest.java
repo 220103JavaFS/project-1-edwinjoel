@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ReimbursementDAOImplTest {
     private static ReimbursementDAO reimbursementDAO = new ReimbursementDAOImpl();
     public static ReimbursementDTO reimb = new ReimbursementDTO();
@@ -16,8 +18,8 @@ public class ReimbursementDAOImplTest {
     @BeforeEach
     public void setup(){
         reimb.setAmount(100);
-        User jimUser = new User(10000,"itsJim", "password".getBytes(StandardCharsets.UTF_8), "Jim" , "Lee", "jimlee@gmail.com", UserRole.EMPLOYEE);
-        User billUser = new User(10001,"itsBill", "password1".getBytes(StandardCharsets.UTF_8), "Bill" , "Brown", "billbrown@gmail.com", UserRole.MANAGER);
+        User jimUser = new User(10000,"itsJim", "password".getBytes(StandardCharsets.UTF_8), "Jim" , "Lee", "jimlee@gmail.com",1, UserRole.EMPLOYEE);
+        User billUser = new User(10001,"itsBill", "password1".getBytes(StandardCharsets.UTF_8), "Bill" , "Brown", "billbrown@gmail.com",2, UserRole.MANAGER);
         reimb.setAuthorUser(jimUser);
         reimb.setAuthorUserId(jimUser.getUserId());
         reimb.setResolverUser(billUser);
@@ -31,8 +33,8 @@ public class ReimbursementDAOImplTest {
         reimb.setTimeSubmitted(new Timestamp(System.currentTimeMillis()));
 
         reimb2.setAmount(200);
-        User jimUser2 = new User(10101,"itsJim2", "password2".getBytes(StandardCharsets.UTF_8), "Jim" , "Lee", "jimlee@gmail.com", UserRole.EMPLOYEE);
-        User billUser2 = new User(10102,"itsBill2", "password12".getBytes(StandardCharsets.UTF_8), "Bill" , "Brown", "billbrown@gmail.com", UserRole.MANAGER);
+        User jimUser2 = new User(10101,"itsJim2", "password2".getBytes(StandardCharsets.UTF_8), "Jim" , "Lee", "jimlee@gmail.com",1, UserRole.EMPLOYEE);
+        User billUser2 = new User(10102,"itsBill2", "password12".getBytes(StandardCharsets.UTF_8), "Bill" , "Brown", "billbrown@gmail.com",1, UserRole.MANAGER);
         reimb2.setAuthorUser(jimUser2);
         reimb2.setAuthorUserId(jimUser2.getUserId());
         reimb2.setResolverUser(billUser2);

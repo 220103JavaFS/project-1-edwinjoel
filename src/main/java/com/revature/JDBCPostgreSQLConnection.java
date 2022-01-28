@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JDBCPostgresSQLConnection {
+public class JDBCPostgreSQLConnection {
 
     private static String url2 = "jdbc:postgresql://javafs220103ohgejb.ccidemni0rly.us-east-2.rds.amazonaws.com:5432/postgres";
 
@@ -21,7 +21,7 @@ public class JDBCPostgresSQLConnection {
                 e.printStackTrace();
             }
 
-           return DriverManager.getConnection(url2, userName, password);
+           return DriverManager.getConnection(url2, "postgres", "password1");
     }
 
 }
