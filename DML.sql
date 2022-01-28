@@ -1,13 +1,20 @@
+DROP TABLE IF EXISTS ers_reimbursement_status CASCADE;
+DROP TABLE IF EXISTS ers_reimbursement_type CASCADE;
+DROP TABLE IF EXISTS ers_user_roles CASCADE;
+DROP TABLE IF EXISTS ers_users CASCADE;
+DROP TABLE IF EXISTS ers_reimbursement CASCADE;
 --Inserting some data into ers_users for testing.
 
 TRUNCATE ers_users CASCADE;
 ALTER SEQUENCE ers_users_ers_user_id_seq RESTART WITH 1;
 --TRUNCATE ers_reimbursement CASCADE;
 
-INSERT INTO ers_user_roles (ers_user_roles.ers_user_role_id, user_role) VALUES
+--create roles for users.
+INSERT INTO ers_user_roles (ers_user_role_id, user_role) VALUES
 (1, 'MANAGER'),
 (2, 'EMPLOYEE');
 
+--Insert data into users.
 INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) VALUES
 ('scardo', 'ab2912d3947ceaa37f79a96b22bb030a', 'Shara', 'Cardo' ,'scardo0@lycos.com', 1),
 ('avoas', '7d1149f287a50e78b52b2cf04be04549', 'Ardene', 'Voas' ,'avoas1@europa.eu', 2),
@@ -27,7 +34,39 @@ INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_na
 
 SELECT * FROM ers_users;
 
-INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_author, 
-							   reimb_status_id, reimb_type_id) VALUES
-(2, TIMESTAMP '2011-05-16 15:36:38', 'Travel expenses' ,2, 1, 1);
+
+INSERT INTO ers_reimbursement_status (reimb_status_id, reimb_status) VALUES
+			(1, 'PENDING'),
+			(2, 'APPROVED'),
+			(3, 'DENIED');
+		
+SELECT * FROM ers_reimbursement_status;
+
+INSERT INTO ers_reimbursement_type (reimb_type_id, reimb_type) VALUES
+			(1, 'LODGING'),
+			(2, 'TRAVEL'),
+			(3, 'FOOD'),
+			(4, 'OTHER');
+		
+SELECT * FROM ers_reimbursement_type;
+
+--Insert status pending reimbursement
+INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) VALUES
+(17, TIMESTAMP '2011-05-16 15:21:38', 'Travel expenses' ,17, 1,2),
+(23, TIMESTAMP '2011-06-17 14:56:38', 'Restaurant expenses' ,18, 1,3),
+(35, TIMESTAMP '2011-07-18 16:06:38', 'Hotel expenses' ,19, 1,1),
+(11, TIMESTAMP '2011-08-19 17:46:38', 'Entertaiment expenses' ,17, 1,4),
+(18, TIMESTAMP '2011-09-20 13:16:38', 'Taxi expenses' ,18, 1,2),
+(55, TIMESTAMP '2011-10-21 15:27:38', 'Others expenses' ,19, 1,4);
+
+SELECT * FROM  ers_reimbursement;
+
+--Insert status Approved reimbursement
+INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES
+(27, TIMESTAMP '2011-03-16 15:21:38', TIMESTAMP '2011-04-16 15:21:38', 'Travel expenses' , 16,20, 2,2),
+(33, TIMESTAMP '2011-03-17 14:56:38', TIMESTAMP '2011-04-17 14:56:38', 'Restaurant expenses' , 16,21, 2,3),
+(27, TIMESTAMP '2011-05-16 15:21:38', TIMESTAMP '2011-06-16 15:21:38', 'Travel expenses' , 16,22, 2,1),
+(33, TIMESTAMP '2011-04-17 14:56:38', TIMESTAMP '2011-05-17 14:56:38', 'Restaurant expenses', 16,23, 3,2),
+(45, TIMESTAMP '2011-04-21 15:27:38', TIMESTAMP '2011-05-21 15:27:38', 'Others expenses', 16,24, 3,2);
+SELECT * FROM  ers_reimbursement;
 
