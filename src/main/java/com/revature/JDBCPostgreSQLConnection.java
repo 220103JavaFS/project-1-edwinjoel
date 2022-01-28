@@ -21,7 +21,6 @@ public class JDBCPostgreSQLConnection {
                 e.printStackTrace();
             }
 
-
            return DriverManager.getConnection(url2, userName, password);
     }
 
