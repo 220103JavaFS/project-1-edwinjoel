@@ -4,9 +4,9 @@ import com.revature.model.*;
 import org.junit.jupiter.api.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -52,23 +52,32 @@ public class ReimbursementDAOImplTest {
     @Order(1)
     void testAddReimbursement(){
         assertTrue(reimbursementDAO.addReimbursement(reimb));
+
     }
 
     @Test
     @Order(2)
-    void testGetReimbursement(){
-        assertEquals(reimb, reimbursementDAO.getAllReimbursementsByAuthor(reimb.getAuthorUserId()));
+    void testGetAllReimbursement(){
+        ArrayList<ReimbursementDTO> reimbursementList = reimbursementDAO.getAllReimbursements();
+        assertFalse(reimbursementList.isEmpty());
+        reimb = reimbursementList.get(reimbursementList.size()-1);
     }
 
     @Test
     @Order(3)
+    void testGetReimbursement(){
+        assertEquals(reimb.getAuthorUserId(), reimbursementDAO.getReimbursementById(reimb.getId()).getAuthorUserId());
+    }
+
+    @Test
+    @Order(4)
     void testUpdate(){
         assertTrue(reimbursementDAO.updateReimbursement(reimb2, reimb.getId()));
         assertEquals(reimb2.getAuthorUserId(), reimbursementDAO.getReimbursementById(reimb.getId()).getAuthorUserId());
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void testDelete(){
         assertTrue(reimbursementDAO.deleteReimbursement(reimb.getId()));
         assertNull(reimbursementDAO.getReimbursementById(reimb.getId()));
