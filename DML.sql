@@ -1,0 +1,33 @@
+--Inserting some data into ers_users for testing.
+
+TRUNCATE ers_users CASCADE;
+ALTER SEQUENCE ers_users_ers_user_id_seq RESTART WITH 1;
+--TRUNCATE ers_reimbursement CASCADE;
+
+INSERT INTO ers_user_roles (ers_user_roles.ers_user_role_id, user_role) VALUES
+(1, 'MANAGER'),
+(2, 'EMPLOYEE');
+
+INSERT INTO ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) VALUES
+('scardo', 'ab2912d3947ceaa37f79a96b22bb030a', 'Shara', 'Cardo' ,'scardo0@lycos.com', 1),
+('avoas', '7d1149f287a50e78b52b2cf04be04549', 'Ardene', 'Voas' ,'avoas1@europa.eu', 2),
+('vokroy', '3fe1c951edca8d4b2d387dd37b5b73b0', 'Valli', 'Okroy' ,'vokroy2@1688.com', 2),
+('aambrogio', '30a14a517ebda498dc2a4cef2f9cb09e', 'Ashleigh', 'Ambrogio' ,'aambrogio3@nbcnews.com', 2),
+('zsheldrake', 'f84aad61fdf4beb840456be3fd5d18c2', 'Zuzana', 'Sheldrake' ,'zsheldrake4@cbc.ca',2),
+('gboyde', 'bd1551b8f1285459db08ad56322506e6', 'Gianni', 'Boyde' ,'gboyde5@webnode.com',2),
+('marger', 'cd600f8a6110a433515c633536a2af12', 'Myrna', 'Arger' ,'marger6@over-blog.com',2),
+('ucarleton', 'e15bfbb1d16a3f3eb93e6f739ad6dce7', 'Ulric', 'Carleton' ,'ucarleton7@dagondesign.com',2),
+('asergeant', '5fc77bda6bb7bbd8fd1b91e44faf97bc', 'Almeria', 'Sergeant' ,'asergeant8@google.nl',2),
+('sdiglin', '662bfa62c4e4cebe0b813eed48ca4820', 'Shayne', 'Diglin' ,'sdiglin9@google.com.br',2),
+('hessbergera', 'ecc7a1d382b6b149e921629e1be3c868', 'Henrieta', 'Essberger' ,'hessbergera@cloudflare.com',2),
+('emitchardb', 'f85317167ff637c4ffb8e17114c0f389', 'Edin', 'Mitchard' ,'emitchardb@so-net.ne.jp',2),
+('tgrishmanovc', '0b082a33b6edd5c1315e4d4af83f1b16', 'Thibaud', 'Grishmanov' ,'tgrishmanovc@clickbank.net',2),
+('cclossd', '300f24ec89e277040db6f584ac09776d', 'Chere', 'Closs' ,'cclossd@who.int',2),
+('sbankhurste', '712250363dcbaba4750de4cb62d6c4f3', 'Stella', 'Bankhurst' ,'sbankhurste@rakuten.co.jp',2);
+
+SELECT * FROM ers_users;
+
+INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_author, 
+							   reimb_status_id, reimb_type_id) VALUES
+(2, TIMESTAMP '2011-05-16 15:36:38', 'Travel expenses' ,2, 1, 1);
+
