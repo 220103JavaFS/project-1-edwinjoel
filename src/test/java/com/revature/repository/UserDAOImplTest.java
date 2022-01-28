@@ -69,6 +69,7 @@ public class UserDAOImplTest {
     @Order(5)
     void testDeleteUser(){
         assertTrue(userDAO.deleteUser(testUser.getUsername()));
+        assertTrue(userDAO.deleteUser(testUser2.getUsername()));
         assertNull(userDAO.getUser(testUser.getUsername()));
     }
 

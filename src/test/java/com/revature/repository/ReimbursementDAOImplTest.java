@@ -15,8 +15,8 @@ public class ReimbursementDAOImplTest {
     public static ReimbursementDTO reimb = new ReimbursementDTO();
     public static ReimbursementDTO reimb2 = new ReimbursementDTO();
 
-    @BeforeEach
-    public void setup(){
+    @BeforeAll
+    static void setup(){
         reimb.setAmount(100);
         User jimUser = new User(10000,"itsJim", "password".getBytes(StandardCharsets.UTF_8), "Jim" , "Lee", "jimlee@gmail.com",1, UserRole.EMPLOYEE);
         User billUser = new User(10001,"itsBill", "password1".getBytes(StandardCharsets.UTF_8), "Bill" , "Brown", "billbrown@gmail.com",2, UserRole.MANAGER);
