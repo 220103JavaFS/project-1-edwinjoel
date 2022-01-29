@@ -70,3 +70,39 @@ INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, re
 (45, TIMESTAMP '2011-04-21 15:27:38', TIMESTAMP '2011-05-21 15:27:38', 'Others expenses', 16,24, 3,2);
 SELECT * FROM  ers_reimbursement;
 
+
+---------TESTING QUERIES---------
+
+SELECT ers_reimbursement.*, ers_reimbursement_type.*, ers_reimbursement_status.*, ers_users1.*, ers_user_roles1.user_role , ers_users2.ers_user_id AS ers_user_id2,
+ers_users2.ers_username AS ers_username2, ers_users2.ers_password AS ers_password2, ers_users2.user_first_name AS user_first_name2, ers_users2.user_last_name AS user_last_name2,
+ers_users2.user_email AS user_email2, ers_users2.user_role_id AS user_role_id2, ers_user_roles2.user_role AS user_role2
+FROM ers_reimbursement INNER JOIN ers_reimbursement_status ON ers_reimbursement.reimb_status_id = ers_reimbursement_status.reimb_status_id 
+INNER JOIN ers_reimbursement_type ON ers_reimbursement.reimb_type_id = ers_reimbursement_type.reimb_type_id
+INNER JOIN ers_users AS ers_users1 ON reimb_author = ers_users1.ers_user_id
+INNER JOIN ers_user_roles AS ers_user_roles1 ON ers_users1.user_role_id = ers_user_roles1.ers_user_role_id
+LEFT JOIN ers_users AS ers_users2 ON reimb_resolver = ers_users2.ers_user_id
+LEFT JOIN ers_user_roles AS ers_user_roles2 ON ers_users2.user_role_id = ers_user_roles2.ers_user_role_id;
+
+
+-----VIEW ALL TICKETS BY EMPLOYEE--------------
+SELECT  ers_reimbursement.reimb_id, ers_reimbursement.reimb_amount, ers_reimbursement.reimb_author, ers_users.user_first_name, 
+		ers_users.user_last_name, ers_reimbursement_type.reimb_type, ers_reimbursement_status.reimb_status
+FROM ers_reimbursement INNER JOIN ers_users ON ers_reimbursement.reimb_author = ers_users.ers_user_id 
+INNER JOIN ers_reimbursement_status ON ers_reimbursement.reimb_status_id = ers_reimbursement_status.reimb_status_id
+INNER JOIN ers_reimbursement_type ON ers_reimbursement.reimb_type_id = ers_reimbursement_type.reimb_type_id
+WHERE ers_reimbursement.reimb_author IN (16); --FOR USER WITH ID =16.
+
+-----VIEW ALL TICKETS--------------
+SELECT  ers_reimbursement.reimb_id, ers_reimbursement.reimb_amount, ers_reimbursement.reimb_author, ers_users.user_first_name, 
+		ers_users.user_last_name, ers_reimbursement_type.reimb_type, ers_reimbursement_status.reimb_status
+FROM ers_reimbursement INNER JOIN ers_users ON ers_reimbursement.reimb_author = ers_users.ers_user_id 
+INNER JOIN ers_reimbursement_status ON ers_reimbursement.reimb_status_id = ers_reimbursement_status.reimb_status_id
+INNER JOIN ers_reimbursement_type ON ers_reimbursement.reimb_type_id = ers_reimbursement_type.reimb_type_id;
+
+-----VIEW ALL TICKETS BY STATUS--------------
+SELECT  ers_reimbursement.reimb_id, ers_reimbursement.reimb_amount, ers_reimbursement.reimb_author, ers_users.user_first_name, 
+		ers_users.user_last_name, ers_reimbursement_type.reimb_type, ers_reimbursement_status.reimb_status
+FROM ers_reimbursement INNER JOIN ers_users ON ers_reimbursement.reimb_author = ers_users.ers_user_id 
+INNER JOIN ers_reimbursement_status ON ers_reimbursement.reimb_status_id = ers_reimbursement_status.reimb_status_id
+INNER JOIN ers_reimbursement_type ON ers_reimbursement.reimb_type_id = ers_reimbursement_type.reimb_type_id
+WHERE  ers_reimbursement.reimb_status_id IN (2); --FOR STATUS PENDING.

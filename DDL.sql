@@ -106,3 +106,5 @@ CREATE TABLE public.ers_reimbursement (
 	CONSTRAINT ers_reimbursement_fk3 FOREIGN KEY (reimb_author) REFERENCES public.ers_users(ers_user_id),
 	CONSTRAINT ers_reimbursement_fk4 FOREIGN KEY (reimb_resolver) REFERENCES public.ers_users(ers_user_id)
 );
+
+
