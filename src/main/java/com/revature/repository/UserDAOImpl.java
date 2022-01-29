@@ -69,6 +69,7 @@ public class UserDAOImpl implements UserDAO {
 
             ResultSet resultSet = statement.executeQuery();
             User user = null;
+
             if (resultSet.next()) {
                 user = createUserObj(resultSet);
             }
