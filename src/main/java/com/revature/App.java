@@ -6,6 +6,7 @@ import com.revature.controller.ReimbursementController;
 import com.revature.controller.UserController;
 import com.revature.model.UserRole;
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +20,9 @@ public class App {
     public static void main(String args[]){
         log.info("Application Starting");
 
-        javalinApp = Javalin.create(javalinConfig -> {
-            javalinConfig.accessManager((handler, ctx, routeRoles) -> {
+        javalinApp = Javalin.create(config -> {
+            config.addStaticFiles("./src/main/resources/html", Location.EXTERNAL);
+            config.accessManager((handler, ctx, routeRoles) -> {
 
                 //GENERAL ACCESS MANAGER
 
@@ -29,6 +31,7 @@ public class App {
                 openList.add("/login");
                 openList.add("/logout");
                 openList.add("/users/new");
+                openList.add("/reimbursements");
 
 
                 if(ctx.req.getSession(false)==null && !openList.contains(ctx.path())){
@@ -60,7 +63,10 @@ public class App {
                 }
 
             });
-        });
+        }
+
+
+        );
 
         configureRoutes(new LoginController(), new ReimbursementController(), new UserController());
 
