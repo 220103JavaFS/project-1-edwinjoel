@@ -24,6 +24,9 @@ public class App {
             config.addStaticFiles("./src/main/resources/html", Location.EXTERNAL);
             config.accessManager((handler, ctx, routeRoles) -> {
 
+                handler.handle(ctx);
+
+
                 //GENERAL ACCESS MANAGER
 
                 //if the user does not have a session deny request unless it's for the login or logout or open endpoints

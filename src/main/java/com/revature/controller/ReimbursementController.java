@@ -33,7 +33,7 @@ public class ReimbursementController extends Controller{
             else{
                 ctx.status(400);
             }
-        }, UserRole.EMPLOYEE);
+        }, UserRole.MANAGER);
 
         //gets all reimbursements tickets for one user/author.
         app.get("/reimbursements/id/{reimbId}", ctx -> {
