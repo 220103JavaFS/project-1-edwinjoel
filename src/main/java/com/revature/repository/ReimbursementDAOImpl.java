@@ -124,6 +124,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     @Override
     public boolean updateReimbursement(ReimbursementDTO reimbursement, int reimbId) {
         try( Connection connection = JDBCPostgreSQLConnection.getConnection()){
+            //Change to update just the status and the resolved dated and resolver id.
+            //UPDATE ers_reimbursement SET reimb_resolved = ?, reimb_resolver = ?, reimb_status_id = ? WHERE reimb_id = ?
             String sql = "UPDATE ers_reimbursement SET reimb_amount = ?, reimb_submitted = ?, reimb_resolved = ?, reimb_description = ?, reimb_author = ?, reimb_resolver = ?, reimb_status_id = ?, reimb_type_id = ? WHERE reimb_id = ?;";
             PreparedStatement statement = connection.prepareStatement(sql);
 

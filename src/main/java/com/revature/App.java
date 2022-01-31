@@ -16,7 +16,6 @@ public class App {
         log.info("Application Starting");
 
         javalinApp = Javalin.create();
-
         configureRoutes(new LoginController(), new ReimbursementController());
 
         javalinApp.start(7000);
