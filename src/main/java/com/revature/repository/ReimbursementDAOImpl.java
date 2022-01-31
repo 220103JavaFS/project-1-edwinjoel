@@ -128,7 +128,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ReimbursementDTO oldReimbursement = this.getReimbursementById(reimbId);
-            if(oldReimbursement == null){
+            if(oldReimbursement == null || oldReimbursement.getAuthorUserId() == reimbursement.getResolverUserId()){
                 return false;
             }
 
