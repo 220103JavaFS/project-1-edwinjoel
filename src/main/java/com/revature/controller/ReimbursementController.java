@@ -10,7 +10,9 @@ import io.javalin.http.Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ReimbursementController extends Controller{
 
@@ -60,7 +62,7 @@ public class ReimbursementController extends Controller{
             }
         }, UserRole.MANAGER);
 
-        //gets all reimbursements tickets for one user/author.
+        //gets all reimbursements tickets for one user/resolver.
         app.get("/reimbursements/resolver/{userId}", ctx -> {
             int userId = Integer.parseInt(ctx.pathParam("userId"));
             ArrayList<ReimbursementDTO> reimbList = reimbursementService.getAllReimbursementsByResolver(userId);
@@ -96,7 +98,7 @@ public class ReimbursementController extends Controller{
 
         //gets all reimbursements tickets by status.
         app.get("/reimbursements/status/{statusString}", ctx -> {
-            String statusString = ctx.pathParam("statusString");
+            String statusString = ctx.pathParam("statusString").toUpperCase();
             Status status = null;
             try {
                 status = Status.valueOf(statusString);
@@ -120,6 +122,17 @@ public class ReimbursementController extends Controller{
         //Create a new reimbursement ticket.
         app.post("/reimbursements/add", ctx -> {
             ReimbursementDTO reimbursement = ctx.bodyAsClass(ReimbursementDTO.class);
+            reimbursement.setTimeSubmitted(new Timestamp(System.currentTimeMillis()));
+            int userId = 0;
+            try{
+                userId = (Integer)ctx.req.getSession(false).getAttribute("userId");
+            } catch (ClassCastException e){
+                e.printStackTrace();
+                ctx.status(400);
+                return;
+            }
+            reimbursement.setAuthorUserId(userId);
+
             if(reimbursementService.addReimbursement(reimbursement)){
                 ctx.status(202);
             }else {
@@ -141,8 +154,60 @@ public class ReimbursementController extends Controller{
         }, UserRole.MANAGER);
 
 
+        //Approve reimbursement ticket by reimbursement ID.
+        app.put("/reimbursements/approve/{reimbId}", ctx -> {
+
+            int reimbId = Integer.parseInt(ctx.pathParam("reimbId"));
+            ReimbursementDTO reimbursement = new ReimbursementDTO();
+            reimbursement.setTimeResolved(new Timestamp(System.currentTimeMillis()));
+            int userId = 0;
+            try{
+                userId = (Integer)ctx.req.getSession(false).getAttribute("userId");
+            } catch (ClassCastException e){
+                e.printStackTrace();
+                ctx.status(400);
+                return;
+            }
+            reimbursement.setResolverUserId(userId);
+            reimbursement.setStatusId(2);
+
+            if(reimbursementService.updateReimbursement(reimbursement, reimbId)){
+                ctx.status(202);
+            }else {
+                ctx.status(400);
+            }
+
+        }, UserRole.MANAGER);
+
+        //Deny reimbursement ticket by reimbursement ID.
+        app.put("/reimbursements/deny/{reimbId}", ctx -> {
+
+            int reimbId = Integer.parseInt(ctx.pathParam("reimbId"));
+            ReimbursementDTO reimbursement = new ReimbursementDTO();
+            reimbursement.setTimeResolved(new Timestamp(System.currentTimeMillis()));
+            int userId = 0;
+            try{
+                userId = (Integer)ctx.req.getSession(false).getAttribute("userId");
+            } catch (ClassCastException e){
+                e.printStackTrace();
+                ctx.status(400);
+                return;
+            }
+            reimbursement.setResolverUserId(userId);
+            reimbursement.setStatusId(3);
+
+            if(reimbursementService.updateReimbursement(reimbursement, reimbId)){
+                ctx.status(202);
+            }else {
+                ctx.status(400);
+            }
+
+        }, UserRole.MANAGER);
+
+
+
         //Delete a reimbursement ticket by id.
-        app.post("/reimbursements/delete/{reimbId}", ctx -> {
+        app.delete("/reimbursements/delete/{reimbId}", ctx -> {
             int reimbId = Integer.parseInt(ctx.pathParam("reimbId"));
 
             if(reimbursementService.deleteReimbursement(reimbId)){

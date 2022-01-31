@@ -16,7 +16,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public ArrayList<ReimbursementDTO> getAllReimbursements() {
         try (Connection connection = JDBCPostgreSQLConnection.getConnection()) {
             ArrayList<ReimbursementDTO> list = new ArrayList<>();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM getAll();");
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM getAll() ORDER BY reimb_id;");
             while (resultSet.next()) {
                 list.add(createReimbursementDAOObj(resultSet));
             }

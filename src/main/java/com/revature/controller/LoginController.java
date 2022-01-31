@@ -25,7 +25,7 @@ public class LoginController extends Controller {
             if(user != null){
                 ctx.req.getSession();
                 ctx.req.getSession(false).setAttribute("user", user);
-                ctx.req.getSession(false).setAttribute("userRole", user.getRoleId());
+                ctx.req.getSession(false).setAttribute("userRole", user.getRole());
                 ctx.req.getSession(false).setAttribute("userRoleId", user.getRoleId());
                 ctx.req.getSession(false).setAttribute("userId", user.getUserId());
                 ctx.status(200);
