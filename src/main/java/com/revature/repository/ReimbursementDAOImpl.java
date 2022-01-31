@@ -16,7 +16,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public ArrayList<ReimbursementDTO> getAllReimbursements() {
         try (Connection connection = JDBCPostgreSQLConnection.getConnection()) {
             ArrayList<ReimbursementDTO> list = new ArrayList<>();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM getAll();");
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM getAll() ORDER BY reimb_id;");
             while (resultSet.next()) {
                 list.add(createReimbursementDAOObj(resultSet));
             }
@@ -124,8 +124,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     @Override
     public boolean updateReimbursement(ReimbursementDTO reimbursement, int reimbId) {
         try( Connection connection = JDBCPostgreSQLConnection.getConnection()){
-            //Change to update just the status and the resolved dated and resolver id.
-            //UPDATE ers_reimbursement SET reimb_resolved = ?, reimb_resolver = ?, reimb_status_id = ? WHERE reimb_id = ?
             String sql = "UPDATE ers_reimbursement SET reimb_amount = ?, reimb_submitted = ?, reimb_resolved = ?, reimb_description = ?, reimb_author = ?, reimb_resolver = ?, reimb_status_id = ?, reimb_type_id = ? WHERE reimb_id = ?;";
             PreparedStatement statement = connection.prepareStatement(sql);
 
