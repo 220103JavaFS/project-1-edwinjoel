@@ -3,6 +3,7 @@ package com.revature;
 import com.revature.controller.Controller;
 import com.revature.controller.LoginController;
 import com.revature.controller.ReimbursementController;
+import com.revature.controller.UserController;
 import com.revature.model.UserRole;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ public class App {
                 ArrayList<String> openList = new ArrayList<>();
                 openList.add("/login");
                 openList.add("/logout");
+                openList.add("/users/new");
 
 
                 if(ctx.req.getSession(false)==null && !openList.contains(ctx.path())){
@@ -37,7 +39,7 @@ public class App {
                 //CHECKING USERS ACCESS LEVEL
                 UserRole userRole = UserRole.EMPLOYEE;
                 try{
-                    userRole = (UserRole)(ctx.req.getSession(false).getAttribute("UserRole"));
+                    userRole = (UserRole)(ctx.req.getSession(false).getAttribute("userRole"));
                 }
                 catch (Exception e){
                     //attribute "accessLevel" didn't exist or is not an Account object
@@ -46,7 +48,7 @@ public class App {
 
 
                 //if user is an MANAGER
-                if (userRole.equals(UserRole.MANAGER)) {
+                if(userRole.equals(UserRole.MANAGER)) {
                     handler.handle(ctx);
                 }
                 //if user is EMPLOYEE and route is for EMPLOYEE
@@ -60,7 +62,7 @@ public class App {
             });
         });
 
-        configureRoutes(new LoginController(), new ReimbursementController());
+        configureRoutes(new LoginController(), new ReimbursementController(), new UserController());
 
         javalinApp.start(7000);
 
