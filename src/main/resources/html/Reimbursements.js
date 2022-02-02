@@ -15,6 +15,9 @@ statusbtn.addEventListener('click', getByStatus);
 let loginbtn = document.getElementById('loginbtn');
 loginbtn.addEventListener('click', login);
 
+let logoutbtn = document.getElementById('logoutbtn');
+logoutbtn.addEventListener('click', logout);
+
 async function fetchFunc() {
   //get the new references everybutton press
   oldTableBody = document.getElementById('tbody');
@@ -81,6 +84,18 @@ async function login() {
     console.log('logged in');
   } else {
     console.log('log in failed ');
+  }
+}
+
+async function logout() {
+  let url = 'http://localhost:7000/logout';
+
+  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+
+  if (response.status === 200) {
+    console.log('logged out');
+  } else {
+    console.log('logout failed');
   }
 }
 

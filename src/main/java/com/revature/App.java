@@ -24,7 +24,6 @@ public class App {
             config.addStaticFiles("./src/main/resources/html", Location.EXTERNAL);
             config.accessManager((handler, ctx, routeRoles) -> {
 
-                handler.handle(ctx);
 
 
                 //GENERAL ACCESS MANAGER
@@ -34,7 +33,6 @@ public class App {
                 openList.add("/login");
                 openList.add("/logout");
                 openList.add("/users/new");
-                openList.add("/reimbursements");
 
 
                 if(ctx.req.getSession(false)==null && !openList.contains(ctx.path())){
@@ -48,7 +46,7 @@ public class App {
                     userRole = (UserRole)(ctx.req.getSession(false).getAttribute("userRole"));
                 }
                 catch (Exception e){
-                    //attribute "accessLevel" didn't exist or is not an Account object
+                    //attribute "userRole" didn't exist
                 }
 
 

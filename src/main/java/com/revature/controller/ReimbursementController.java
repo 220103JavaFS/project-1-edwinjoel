@@ -57,6 +57,9 @@ public class ReimbursementController extends Controller{
                 ctx.status(200);
                 ctx.json(reimbList);
             }
+            else if(reimbList != null && reimbList.isEmpty()){
+                ctx.status(204);
+            }
             else{
                 ctx.status(400);
             }
@@ -69,6 +72,9 @@ public class ReimbursementController extends Controller{
             if(reimbList != null && !reimbList.isEmpty()){
                 ctx.status(200);
                 ctx.json(reimbList);
+            }
+            else if(reimbList != null && reimbList.isEmpty()){
+                ctx.status(204);
             }
             else{
                 ctx.status(400);
@@ -90,6 +96,9 @@ public class ReimbursementController extends Controller{
                 ctx.status(200);
                 ctx.json(reimbList);
             }
+            else if(reimbList != null && reimbList.isEmpty()){
+                ctx.status(204);
+            }
             else{
                 ctx.status(400);
             }
@@ -109,6 +118,9 @@ public class ReimbursementController extends Controller{
             if(reimbList != null && !reimbList.isEmpty()){
                 ctx.status(201);
                 ctx.json(reimbList);
+            }
+            else if(reimbList != null && reimbList.isEmpty()){
+                ctx.status(204);
             }
             else{
                 ctx.status(400);
