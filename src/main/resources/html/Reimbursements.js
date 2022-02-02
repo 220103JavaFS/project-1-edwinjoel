@@ -67,6 +67,8 @@ async function getByStatus() {
 async function login() {
   let usernameEl = document.getElementById('username');
   let passwordEl = document.getElementById('password');
+  let usernamelabelEl = document.getElementById('usernamelabel');
+  let passwordlabelEl = document.getElementById('passwordlabel');
   let user = {
     username: usernameEl.value,
     password: passwordEl.value,
@@ -82,18 +84,34 @@ async function login() {
 
   if (response.status === 200) {
     console.log('logged in');
+    usernameEl.hidden = true;
+    passwordEl.hidden = true;
+    loginbtn.hidden = true;
+    usernamelabelEl.hidden = true;
+    passwordlabelEl.hidden = true;
+    logoutbtn.hidden = false;
   } else {
     console.log('log in failed ');
   }
 }
 
 async function logout() {
+  let usernameEl = document.getElementById('username');
+  let passwordEl = document.getElementById('password');
+  let usernamelabelEl = document.getElementById('usernamelabel');
+  let passwordlabelEl = document.getElementById('passwordlabel');
   let url = 'http://localhost:7000/logout';
 
   let response = await fetch(url, { method: 'GET', credentials: 'include' });
 
   if (response.status === 200) {
     console.log('logged out');
+    usernameEl.hidden = false;
+    passwordEl.hidden = false;
+    loginbtn.hidden = false;
+    usernamelabelEl.hidden = false;
+    passwordlabelEl.hidden = false;
+    logoutbtn.hidden = true;
   } else {
     console.log('logout failed');
   }
@@ -113,6 +131,9 @@ function renderData(data) {
     let type = document.createElement('td');
     let status = document.createElement('td');
 
+    let d = document.createElement('td');
+    let deleteBtn = document.createElement('button');
+
     newRow.appendChild(id);
     newRow.appendChild(amount);
     newRow.appendChild(submitted);
@@ -122,6 +143,7 @@ function renderData(data) {
     newRow.appendChild(resolverId);
     newRow.appendChild(type);
     newRow.appendChild(status);
+    newRow.appendChild(d);
 
     id.innerText = reimb.id;
     amount.innerText = reimb.amount;
@@ -132,6 +154,47 @@ function renderData(data) {
     resolverId.innerText = reimb.resolverUserId;
     type.innerText = reimb.type;
     status.innerText = reimb.status;
+    deleteBtn.innerText = 'X';
+
+    let authorTooltip = document.createElement('div');
+    authorTooltip.setAttribute('class', 'tooltiptext');
+    let text = document.createElement('p');
+    if (reimb.authorUser) {
+      text.innerText = `${reimb.authorUser.firstName} ${reimb.authorUser.lastName}
+      ${reimb.authorUser.role} ${reimb.authorUser.username}
+      ${reimb.authorUser.email}`;
+      authorTooltip.appendChild(text);
+      authorId.appendChild(authorTooltip);
+      authorId.setAttribute('class', 'tooltip');
+    }
+
+    let resolverTooltip = document.createElement('div');
+    resolverTooltip.setAttribute('class', 'tooltiptext');
+    let text2 = document.createElement('p');
+    if (reimb.resolverUser.username) {
+      text2.innerText = `${reimb.resolverUser.firstName} ${reimb.resolverUser.lastName}
+      ${reimb.resolverUser.role} ${reimb.resolverUser.username}
+      ${reimb.resolverUser.email}`;
+      resolverTooltip.appendChild(text2);
+      resolverId.appendChild(resolverTooltip);
+      resolverId.setAttribute('class', 'tooltip');
+    }
+
+    deleteBtn.addEventListener('click', async (e) => {
+      let url = `http://localhost:7000/reimbursements/delete/${reimb.id}`;
+      let response = await fetch(url, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (response.status === 202) {
+        console.log('deleted element');
+      } else {
+        console.log('delete failed');
+      }
+    });
+    d.appendChild(deleteBtn);
+
+    resolverId.setAttribute('class', 'tooltip');
 
     newTableBody.appendChild(newRow);
   }

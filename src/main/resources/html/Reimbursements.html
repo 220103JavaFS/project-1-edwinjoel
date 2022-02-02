@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Hey lol</title>
-    </head>
-    
-    <body>
-        <button id="loginbtn">Login</button>
-        <label for="username">username</label>
-        <input type="text" id="username">
-        <label for="password">password</label>
-        <input type="password" id="password">
-        <button id="logoutbtn">Logout</button>
-        
-        <br>
-        <button id="btn">Get All</button>
-        <br>
-        <button id="statusbtn">Get By Status</button>
-        <select name="status" id="status">
-            <option value="PENDING">PENDING</option>
-            <option value="APPROVED">APPROVED</option>
-            <option value="DENIED">DENIED</option>
-        </select>
-        
-        <br>
-        <table class="table" id="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Amount</th>
-                    <th>Submitted</th>
-                    <th>Resolved</th>
-                    <th>Description</th>
-                    <th>AuthorId</th>
-                    <th>ResolverId</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                <tr>
-                    <td>1</td>
-                    <td>100</td>
-                    <td>12312312</td>
-                    <td>412412412</td>
-                    <td>Went to lunch</td>
-                    <td>23</td>
-                    <td>414</td>
-                    <td>FOOD</td>
-                    <td>APPROVED</td>  
-                </tr>   
-            </tbody>
-            
-            
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <title>Reimbursements</title>
+    <link rel="stylesheet" href="Reimbursement.css" />
+  </head>
 
+  <body>
+    <button id="loginbtn">Login</button>
+    <label for="username" id="usernamelabel">username</label>
+    <input type="text" id="username" />
+    <label for="password" id="passwordlabel">password</label>
+    <input type="password" id="password" />
+    <button id="logoutbtn" hidden="true">Logout</button>
 
+    <br />
+    <button id="btn">Get All</button>
+    <br />
+    <button id="statusbtn">Get By Status</button>
+    <select name="status" id="status">
+      <option value="PENDING">PENDING</option>
+      <option value="APPROVED">APPROVED</option>
+      <option value="DENIED">DENIED</option>
+    </select>
 
-        </table>
+    <br />
+    <table class="table" id="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Amount</th>
+          <th>Submitted</th>
+          <th>Resolved</th>
+          <th>Description</th>
+          <th>AuthorId</th>
+          <th>ResolverId</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr>
+          <td>1</td>
+          <td>100</td>
+          <td>12312312</td>
+          <td>412412412</td>
+          <td>Went to lunch</td>
+          <td>23</td>
+          <td>414</td>
+          <td>FOOD</td>
+          <td>APPROVED</td>
+          <td><button>X</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-
-        <script src="Reimbursements.js"></script>
-    </body>
-
+    <script src="Reimbursements.js"></script>
+  </body>
 </html>
