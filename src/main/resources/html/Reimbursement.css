@@ -1,8 +1,8 @@
-.tooltip {
+.mytooltip {
   position: relative;
 }
 
-.tooltip .tooltiptext {
+.mytooltip .mytooltiptext {
   visibility: hidden;
   width: 200px;
   background-color: black;
@@ -13,9 +13,9 @@
 
   /* Position the tooltip */
   position: absolute;
-  z-index: 100;
+  z-index: 1;
 }
 
-.tooltip:hover .tooltiptext {
+.mytooltip:hover .mytooltiptext {
   visibility: visible;
 }

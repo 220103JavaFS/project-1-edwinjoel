@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="Reimbursement.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div>
+      <button id="loginbtn">Login</button>
+      <label for="username" id="usernamelabel">username</label>
+      <input type="text" id="username" />
+      <label for="password" id="passwordlabel">password</label>
+      <input type="password" id="password" />
+      <button id="logoutbtn" hidden="true">Logout</button>
+
+      <h2>Request reimbursement</h2>
+      <label for="description">Description:</label>
+      <input type="text" id="description" placeholder="Describe the expense" />
+      <br />
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" min="1" max="10000" />
+      <br />
+      <label for="type">Type:</label>
+      <select id="type" name="types">
+        <option value="1">LODGING</option>
+        <option value="2">TRAVEL</option>
+        <option value="3">FOOD</option>
+        <option value="4">OTHER</option>
+      </select>
+      <br />
+      <button type="button" id="addBtn">Add ticket</button>
+    </div>
+
+    <!-- TABLE  -->
+    <br>
+    <br>
+    <h2>My Reimbursements</h2>
+    <button id="refreshbtn">Refresh</button>
+    <table class="table" id="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Amount</th>
+          <th>Submitted</th>
+          <th>Resolved</th>
+          <th>Description</th>
+          <th>AuthorId</th>
+          <th>ResolverId</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr>
+          <td>1</td>
+          <td>100</td>
+          <td>12312312</td>
+          <td>412412412</td>
+          <td>Sample Reimbursement</td>
+          <td>23</td>
+          <td>414</td>
+          <td>FOOD</td>
+          <td>APPROVED</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script src="./AddReimbursement.js"></script>
+  </body>
+</html>

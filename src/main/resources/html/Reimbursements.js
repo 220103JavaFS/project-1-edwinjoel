@@ -15,6 +15,7 @@ statusbtn.addEventListener('click', getByStatus);
 let loginbtn = document.getElementById('loginbtn');
 loginbtn.addEventListener('click', login);
 
+//Logout btn
 let logoutbtn = document.getElementById('logoutbtn');
 logoutbtn.addEventListener('click', logout);
 
@@ -112,12 +113,18 @@ async function logout() {
     usernamelabelEl.hidden = false;
     passwordlabelEl.hidden = false;
     logoutbtn.hidden = true;
+    renderData([]);
   } else {
     console.log('logout failed');
   }
 }
 
 function renderData(data) {
+  table = document.getElementById('table');
+  oldTableBody = document.getElementById('tbody');
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
+
   for (let reimb of data) {
     let newRow = document.createElement('tr');
 
@@ -157,7 +164,7 @@ function renderData(data) {
     deleteBtn.innerText = 'X';
 
     let authorTooltip = document.createElement('div');
-    authorTooltip.setAttribute('class', 'tooltiptext');
+    authorTooltip.setAttribute('class', 'mytooltiptext');
     let text = document.createElement('p');
     if (reimb.authorUser) {
       text.innerText = `${reimb.authorUser.firstName} ${reimb.authorUser.lastName}
@@ -165,11 +172,11 @@ function renderData(data) {
       ${reimb.authorUser.email}`;
       authorTooltip.appendChild(text);
       authorId.appendChild(authorTooltip);
-      authorId.setAttribute('class', 'tooltip');
+      authorId.setAttribute('class', 'mytooltip');
     }
 
     let resolverTooltip = document.createElement('div');
-    resolverTooltip.setAttribute('class', 'tooltiptext');
+    resolverTooltip.setAttribute('class', 'mytooltiptext');
     let text2 = document.createElement('p');
     if (reimb.resolverUser.username) {
       text2.innerText = `${reimb.resolverUser.firstName} ${reimb.resolverUser.lastName}
@@ -177,7 +184,7 @@ function renderData(data) {
       ${reimb.resolverUser.email}`;
       resolverTooltip.appendChild(text2);
       resolverId.appendChild(resolverTooltip);
-      resolverId.setAttribute('class', 'tooltip');
+      resolverId.setAttribute('class', 'mytooltip');
     }
 
     deleteBtn.addEventListener('click', async (e) => {
@@ -193,8 +200,7 @@ function renderData(data) {
       }
     });
     d.appendChild(deleteBtn);
-
-    resolverId.setAttribute('class', 'tooltip');
+    deleteBtn.setAttribute('class', 'btn btn-danger');
 
     newTableBody.appendChild(newRow);
   }
