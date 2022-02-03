@@ -19,7 +19,9 @@ async function login() {
 
   if (response.status === 200) {
     console.log('logged in');
+    window.location.href = 'http://localhost:7000/AddReimbursement.html';
   } else {
     console.log('log in failed ');
+    alert('Invaild username or password');
   }
 }

@@ -35,7 +35,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public ArrayList<ReimbursementDTO> getAllReimbursementsByAuthor(int authorUserId) {
         try (Connection connection = JDBCPostgreSQLConnection.getConnection()) {
             ArrayList<ReimbursementDTO> list = new ArrayList<>();
-            String sql = "SELECT * FROM getByAuthor(?);";
+            String sql = "SELECT * FROM getByAuthor(?) ORDER BY reimb_id;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, authorUserId);
 
@@ -58,7 +58,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public ArrayList<ReimbursementDTO> getAllReimbursementsByResolver(int resolverUserId) {
         try (Connection connection = JDBCPostgreSQLConnection.getConnection()) {
             ArrayList<ReimbursementDTO> list = new ArrayList<>();
-            String sql = "SELECT * FROM getByResolver(?);";
+            String sql = "SELECT * FROM getByResolver(?) ORDER BY reimb_id;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, resolverUserId);
 
@@ -80,7 +80,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public ArrayList<ReimbursementDTO> getAllReimbursementsByStatus(Status status) {
         try (Connection connection = JDBCPostgreSQLConnection.getConnection()) {
             ArrayList<ReimbursementDTO> list = new ArrayList<>();
-            String sql = "SELECT * FROM getByStatus(?);";
+            String sql = "SELECT * FROM getByStatus(?) ORDER BY reimb_id;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, status.toString());
 

@@ -7,17 +7,22 @@ newTableBody.id = 'tbody';
 let btn = document.getElementById('btn');
 btn.addEventListener('click', fetchFunc);
 
-//Get by status btn
-let statusbtn = document.getElementById('statusbtn');
-statusbtn.addEventListener('click', getByStatus);
-
-//Login btn
-let loginbtn = document.getElementById('loginbtn');
-loginbtn.addEventListener('click', login);
+//Status dropdown selector
+let statusEl = document.getElementById('status');
 
 //Logout btn
 let logoutbtn = document.getElementById('logoutbtn');
 logoutbtn.addEventListener('click', logout);
+
+//Author btn
+let authorbtn = document.getElementById('authorbtn');
+authorbtn.addEventListener('click', getByAuthor);
+
+//Resolver btn
+let resolverbtn = document.getElementById('resolverbtn');
+resolverbtn.addEventListener('click', getByResolver);
+
+getPending();
 
 async function fetchFunc() {
   //get the new references everybutton press
@@ -49,7 +54,6 @@ async function getByStatus() {
   newTableBody = document.createElement('tbody');
   newTableBody.id = 'tbody';
 
-  let statusEl = document.getElementById('status');
   let statusValue = statusEl.value;
 
   let url = `http://localhost:7000/reimbursements/status/${statusValue}`;
@@ -65,57 +69,105 @@ async function getByStatus() {
   }
 }
 
-async function login() {
-  let usernameEl = document.getElementById('username');
-  let passwordEl = document.getElementById('password');
-  let usernamelabelEl = document.getElementById('usernamelabel');
-  let passwordlabelEl = document.getElementById('passwordlabel');
-  let user = {
-    username: usernameEl.value,
-    password: passwordEl.value,
-  };
+async function getByAuthor() {
+  //get the new references everybutton press
+  oldTableBody = document.getElementById('tbody');
 
-  let url = 'http://localhost:7000/login';
+  //create a new <tbody> element and set id="tbody"
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
 
-  let response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(user),
-    credentials: 'include',
-  });
+  let authorId = document.getElementById('useridinput').value;
+
+  let url = `http://localhost:7000/reimbursements/author/${authorId}`;
+
+  let response = await fetch(url, { method: 'GET', credentials: 'include' });
 
   if (response.status === 200) {
-    console.log('logged in');
-    usernameEl.hidden = true;
-    passwordEl.hidden = true;
-    loginbtn.hidden = true;
-    usernamelabelEl.hidden = true;
-    passwordlabelEl.hidden = true;
-    logoutbtn.hidden = false;
+    let data = await response.json();
+    console.log(data);
+    renderData(data);
+  } else if (response.status === 204) {
+    empty();
   } else {
-    console.log('log in failed ');
+    console.log('Something went wrong');
+  }
+}
+
+async function getByResolver() {
+  //get the new references everybutton press
+  oldTableBody = document.getElementById('tbody');
+
+  //create a new <tbody> element and set id="tbody"
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
+
+  let resolverId = document.getElementById('useridinput').value;
+
+  let url = `http://localhost:7000/reimbursements/resolver/${resolverId}`;
+
+  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+
+  if (response.status === 200) {
+    let data = await response.json();
+    console.log(data);
+    renderData(data);
+  } else if (response.status === 204) {
+    empty();
+  } else {
+    console.log('Something went wrong');
+  }
+}
+
+async function empty() {
+  //get the new references everybutton press
+  oldTableBody = document.getElementById('tbody');
+
+  //create a new <tbody> element and set id="tbody"
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
+
+  let emptyText = document.createElement('p');
+  emptyText.innerText = "There doesn't seem to be anything here for that...";
+  newTableBody.appendChild(emptyText);
+
+  oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
+}
+
+async function getPending() {
+  //get the new references everybutton press
+  oldTableBody = document.getElementById('tbody');
+
+  //create a new <tbody> element and set id="tbody"
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
+
+  let statusValue = 'pending';
+
+  let url = `http://localhost:7000/reimbursements/status/${statusValue}`;
+
+  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+
+  if (response.status === 201) {
+    let data = await response.json();
+    console.log(data);
+    renderData(data);
+  } else {
+    console.log('Something went wrong');
   }
 }
 
 async function logout() {
-  let usernameEl = document.getElementById('username');
-  let passwordEl = document.getElementById('password');
-  let usernamelabelEl = document.getElementById('usernamelabel');
-  let passwordlabelEl = document.getElementById('passwordlabel');
   let url = 'http://localhost:7000/logout';
 
   let response = await fetch(url, { method: 'GET', credentials: 'include' });
 
   if (response.status === 200) {
     console.log('logged out');
-    usernameEl.hidden = false;
-    passwordEl.hidden = false;
-    loginbtn.hidden = false;
-    usernamelabelEl.hidden = false;
-    passwordlabelEl.hidden = false;
-    logoutbtn.hidden = true;
-    renderData([]);
+    window.location.href = 'http://localhost:7000/';
   } else {
-    console.log('logout failed');
+    console.log('was not logged in');
+    window.location.href = 'http://localhost:7000/';
   }
 }
 
@@ -138,6 +190,10 @@ function renderData(data) {
     let type = document.createElement('td');
     let status = document.createElement('td');
 
+    let changeStatus = document.createElement('td');
+    let approveBtn = document.createElement('button');
+    let denyBtn = document.createElement('button');
+
     let d = document.createElement('td');
     let deleteBtn = document.createElement('button');
 
@@ -150,7 +206,11 @@ function renderData(data) {
     newRow.appendChild(resolverId);
     newRow.appendChild(type);
     newRow.appendChild(status);
+    newRow.appendChild(changeStatus);
+    changeStatus.appendChild(approveBtn);
+    changeStatus.appendChild(denyBtn);
     newRow.appendChild(d);
+    d.appendChild(deleteBtn);
 
     id.innerText = reimb.id;
     amount.innerText = reimb.amount;
@@ -161,7 +221,12 @@ function renderData(data) {
     resolverId.innerText = reimb.resolverUserId;
     type.innerText = reimb.type;
     status.innerText = reimb.status;
-    deleteBtn.innerText = 'X';
+    approveBtn.innerText = '✓';
+    approveBtn.setAttribute('class', 'btn btn-success');
+    denyBtn.innerText = '✘';
+    denyBtn.setAttribute('class', 'btn btn-warning');
+    deleteBtn.innerText = '✘';
+    deleteBtn.setAttribute('class', 'btn btn-danger');
 
     let authorTooltip = document.createElement('div');
     authorTooltip.setAttribute('class', 'mytooltiptext');
@@ -187,6 +252,37 @@ function renderData(data) {
       resolverId.setAttribute('class', 'mytooltip');
     }
 
+    if (reimb.status == 'PENDING') {
+      approveBtn.addEventListener('click', async (e) => {
+        let url = `http://localhost:7000/reimbursements/approve/${reimb.id}`;
+        let response = await fetch(url, {
+          method: 'PATCH',
+          credentials: 'include',
+        });
+        if (response.status === 202) {
+          console.log('Approved element');
+        } else {
+          console.log('approve failed');
+        }
+      });
+
+      denyBtn.addEventListener('click', async (e) => {
+        let url = `http://localhost:7000/reimbursements/deny/${reimb.id}`;
+        let response = await fetch(url, {
+          method: 'PATCH',
+          credentials: 'include',
+        });
+        if (response.status === 202) {
+          console.log('Deny element');
+        } else {
+          console.log('Deny failed');
+        }
+      });
+    } else {
+      approveBtn.disabled = true;
+      denyBtn.disabled = true;
+    }
+
     deleteBtn.addEventListener('click', async (e) => {
       let url = `http://localhost:7000/reimbursements/delete/${reimb.id}`;
       let response = await fetch(url, {
@@ -199,8 +295,6 @@ function renderData(data) {
         console.log('delete failed');
       }
     });
-    d.appendChild(deleteBtn);
-    deleteBtn.setAttribute('class', 'btn btn-danger');
 
     newTableBody.appendChild(newRow);
   }

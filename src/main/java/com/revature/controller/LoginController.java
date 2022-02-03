@@ -24,6 +24,7 @@ public class LoginController extends Controller {
             User user  = loginService.login(userDTO.getUsername(), userDTO.getPassword());
             if(user != null){
                 ctx.req.getSession();
+                ctx.req.getSession(false).setAttribute("path", "/");
                 ctx.req.getSession(false).setAttribute("user", user);
                 ctx.req.getSession(false).setAttribute("userRole", user.getRole());
                 ctx.req.getSession(false).setAttribute("userRoleId", user.getRoleId());

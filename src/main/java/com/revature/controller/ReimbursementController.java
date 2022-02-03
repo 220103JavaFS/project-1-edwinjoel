@@ -167,7 +167,7 @@ public class ReimbursementController extends Controller{
 
 
         //Approve reimbursement ticket by reimbursement ID.
-        app.put("/reimbursements/approve/{reimbId}", ctx -> {
+        app.patch("/reimbursements/approve/{reimbId}", ctx -> {
 
             int reimbId = Integer.parseInt(ctx.pathParam("reimbId"));
             ReimbursementDTO reimbursement = new ReimbursementDTO();
@@ -192,7 +192,7 @@ public class ReimbursementController extends Controller{
         }, UserRole.MANAGER);
 
         //Deny reimbursement ticket by reimbursement ID.
-        app.put("/reimbursements/deny/{reimbId}", ctx -> {
+        app.patch("/reimbursements/deny/{reimbId}", ctx -> {
 
             int reimbId = Integer.parseInt(ctx.pathParam("reimbId"));
             ReimbursementDTO reimbursement = new ReimbursementDTO();

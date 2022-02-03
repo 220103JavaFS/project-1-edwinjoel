@@ -7,10 +7,6 @@ newTableBody.id = 'tbody';
 let addBtn = document.getElementById('addBtn');
 addBtn.addEventListener('click', submitReimbursement);
 
-//Login btn
-let loginbtn = document.getElementById('loginbtn');
-loginbtn.addEventListener('click', login);
-
 //Logout btn
 let logoutbtn = document.getElementById('logoutbtn');
 logoutbtn.addEventListener('click', logout);
@@ -18,6 +14,8 @@ logoutbtn.addEventListener('click', logout);
 //Refresh btn
 let refreshbtn = document.getElementById('refreshbtn');
 refreshbtn.addEventListener('click', refresh);
+
+refresh();
 
 async function submitReimbursement() {
   let Reimbursement = {
@@ -40,58 +38,18 @@ async function submitReimbursement() {
   }
 }
 
-async function login() {
-  let usernameEl = document.getElementById('username');
-  let passwordEl = document.getElementById('password');
-  let usernamelabelEl = document.getElementById('usernamelabel');
-  let passwordlabelEl = document.getElementById('passwordlabel');
-  let user = {
-    username: usernameEl.value,
-    password: passwordEl.value,
-  };
-
-  let url = 'http://localhost:7000/login';
-
-  let response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(user),
-    credentials: 'include',
-  });
-
-  if (response.status === 200) {
-    console.log('logged in');
-    usernameEl.hidden = true;
-    passwordEl.hidden = true;
-    loginbtn.hidden = true;
-    usernamelabelEl.hidden = true;
-    passwordlabelEl.hidden = true;
-    logoutbtn.hidden = false;
-    refresh();
-  } else {
-    console.log('log in failed ');
-  }
-}
 
 async function logout() {
-  let usernameEl = document.getElementById('username');
-  let passwordEl = document.getElementById('password');
-  let usernamelabelEl = document.getElementById('usernamelabel');
-  let passwordlabelEl = document.getElementById('passwordlabel');
   let url = 'http://localhost:7000/logout';
 
   let response = await fetch(url, { method: 'GET', credentials: 'include' });
 
   if (response.status === 200) {
     console.log('logged out');
-    usernameEl.hidden = false;
-    passwordEl.hidden = false;
-    loginbtn.hidden = false;
-    usernamelabelEl.hidden = false;
-    passwordlabelEl.hidden = false;
-    logoutbtn.hidden = true;
-    renderData([]);
+    window.location.href = 'http://localhost:7000/';
   } else {
-    console.log('logout failed');
+    console.log('was not logged in');
+    window.location.href = 'http://localhost:7000/';
   }
 }
 
