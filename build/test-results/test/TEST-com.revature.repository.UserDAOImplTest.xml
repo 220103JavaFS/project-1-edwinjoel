@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.revature.repository.UserDAOImplTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-29T03:39:20" hostname="DESKTOP-DQ4QG63" time="5.358">
+  <properties/>
+  <testcase name="testCreateUser()" classname="com.revature.repository.UserDAOImplTest" time="0.441"/>
+  <testcase name="testGetUser()" classname="com.revature.repository.UserDAOImplTest" time="1.337"/>
+  <testcase name="testGetUserById()" classname="com.revature.repository.UserDAOImplTest" time="0.917"/>
+  <testcase name="testUpdateUser()" classname="com.revature.repository.UserDAOImplTest" time="1.317"/>
+  <testcase name="testDeleteUser()" classname="com.revature.repository.UserDAOImplTest" time="1.343"/>
+  <system-out><![CDATA[21:39:21.059 [Test worker] DEBUG com.revature.App - Added User to Database
+21:39:21.509 [Test worker] DEBUG com.revature.App - Got User from database with username
+21:39:21.945 [Test worker] DEBUG com.revature.App - Got User from database with username
+21:39:22.395 [Test worker] DEBUG com.revature.App - Got User from database with username
+21:39:22.862 [Test worker] DEBUG com.revature.App - Got User from database with user_id
+21:39:23.313 [Test worker] DEBUG com.revature.App - Got User from database with user_id
+21:39:24.151 [Test worker] DEBUG com.revature.App - Got User from database with user_id
+21:39:24.192 [Test worker] DEBUG com.revature.App - Updated User in the Database
+21:39:24.631 [Test worker] DEBUG com.revature.App - Got User from database with user_id
+21:39:25.977 [Test worker] DEBUG com.revature.App - Got User from database with username
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
