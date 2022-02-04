@@ -1,5 +1,5 @@
-const url2 = 'http://3.23.112.168:7000/';
-let url = 'http://localhost:7000/';
+const url = 'http://3.23.112.168:7000/';
+let url2 = 'http://localhost:7000/';
 
 let table = document.getElementById('table');
 let oldTableBody = document.getElementById('tbody');

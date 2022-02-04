@@ -1,5 +1,5 @@
-let url2 = 'http://3.23.112.168:7000/';
-let url = 'http://localhost:7000/';
+let url = 'http://3.23.112.168:7000/';
+let url2 = 'http://localhost:7000/';
 
 let registerbtn = document.getElementById('registerbtn');
 registerbtn.addEventListener('click', register);
