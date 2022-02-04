@@ -279,7 +279,13 @@ function renderData(data) {
     id.innerText = reimb.id;
     amount.innerText = reimb.amount;
     submitted.innerText = new Date(reimb.timeSubmitted);
-    resolved.innerText = new Date(reimb.timeResolved);
+    if(reimb.timeResolved){
+      resolved.innerText = new Date(reimb.timeResolved);
+    }
+    else{
+      resolved.innerText = "";
+    }
+    
     description.innerText = reimb.description;
     authorId.innerText = reimb.authorUserId;
     resolverId.innerText = reimb.resolverUserId;
