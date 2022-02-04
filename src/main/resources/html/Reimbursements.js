@@ -1,3 +1,6 @@
+let url2 = 'http://3.23.112.168:7000/';
+let url = 'http://localhost:7000/';
+
 let table = document.getElementById('table');
 let oldTableBody = document.getElementById('tbody');
 let newTableBody = document.createElement('tbody');
@@ -24,6 +27,12 @@ resolverbtn.addEventListener('click', getByResolver);
 
 getPending();
 
+let a1 = document.getElementById('link1');
+let a2 = document.getElementById('link2');
+
+a1.href = `${url}MyReimbursement.html`;
+a2.href = `${url}Reimbursements.html`;
+
 async function fetchFunc() {
   //get the new references everybutton press
   oldTableBody = document.getElementById('tbody');
@@ -33,9 +42,11 @@ async function fetchFunc() {
   newTableBody.id = 'tbody';
 
   console.log('entered fetchFunc');
-  let url = 'http://localhost:7000/reimbursements';
 
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     let data = await response.json();
@@ -58,9 +69,10 @@ async function getByStatus() {
 
   let statusValue = statusEl.value;
 
-  let url = `http://localhost:7000/reimbursements/status/${statusValue}`;
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements/status/${statusValue}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 201) {
     let data = await response.json();
@@ -83,9 +95,10 @@ async function getByAuthor() {
 
   let authorId = document.getElementById('useridinput').value;
 
-  let url = `http://localhost:7000/reimbursements/author/${authorId}`;
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements/author/${authorId}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     let data = await response.json();
@@ -110,9 +123,10 @@ async function getByResolver() {
 
   let resolverId = document.getElementById('useridinput').value;
 
-  let url = `http://localhost:7000/reimbursements/resolver/${resolverId}`;
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements/resolver/${resolverId}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     let data = await response.json();
@@ -167,9 +181,10 @@ async function getPending() {
 
   let statusValue = 'pending';
 
-  let url = `http://localhost:7000/reimbursements/status/${statusValue}`;
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements/status/${statusValue}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 201) {
     let data = await response.json();
@@ -183,16 +198,17 @@ async function getPending() {
 }
 
 async function logout() {
-  let url = 'http://localhost:7000/logout';
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}logout`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     console.log('logged out');
-    window.location.href = 'http://localhost:7000/';
+    window.location.href = url;
   } else {
     console.log('was not logged in');
-    window.location.href = 'http://localhost:7000/';
+    window.location.href = url;
   }
 }
 
@@ -279,8 +295,7 @@ function renderData(data) {
 
     if (reimb.status == 'PENDING') {
       approveBtn.addEventListener('click', async (e) => {
-        let url = `http://localhost:7000/reimbursements/approve/${reimb.id}`;
-        let response = await fetch(url, {
+        let response = await fetch(`${url}reimbursements/approve/${reimb.id}`, {
           method: 'PATCH',
           credentials: 'include',
         });
@@ -292,8 +307,7 @@ function renderData(data) {
       });
 
       denyBtn.addEventListener('click', async (e) => {
-        let url = `http://localhost:7000/reimbursements/deny/${reimb.id}`;
-        let response = await fetch(url, {
+        let response = await fetch(`${url}reimbursements/deny/${reimb.id}`, {
           method: 'PATCH',
           credentials: 'include',
         });
@@ -309,8 +323,7 @@ function renderData(data) {
     }
 
     deleteBtn.addEventListener('click', async (e) => {
-      let url = `http://localhost:7000/reimbursements/delete/${reimb.id}`;
-      let response = await fetch(url, {
+      let response = await fetch(`${url}reimbursements/delete/${reimb.id}`, {
         method: 'DELETE',
         credentials: 'include',
       });

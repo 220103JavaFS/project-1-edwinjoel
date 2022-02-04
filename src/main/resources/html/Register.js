@@ -1,7 +1,8 @@
-//Login btn
+let url2 = 'http://3.23.112.168:7000/';
+let url = 'http://localhost:7000/';
+
 let registerbtn = document.getElementById('registerbtn');
 registerbtn.addEventListener('click', register);
-let url = 'http://localhost:7000/users/new';
 
 async function register() {
   let firstnameEl = document.getElementById('firstname');
@@ -19,14 +20,14 @@ async function register() {
     userRoleString: roleEl.value,
   };
 
-  let response = await fetch(url, {
+  let response = await fetch(`${url}users/new`, {
     method: 'POST',
     body: JSON.stringify(user),
   });
 
   if (response.status === 201) {
     console.log('Registered');
-    window.location.href = 'http://localhost:7000';
+    window.location.href = url;
   } else {
     console.log('Register Failed');
     alert("Register Failed, but uhh... we're sure you'll figure it out...");

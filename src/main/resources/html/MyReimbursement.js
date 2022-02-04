@@ -1,4 +1,6 @@
-const url = 'http://localhost:7000/reimbursements/add';
+const url2 = 'http://3.23.112.168:7000/';
+let url = 'http://localhost:7000/';
+
 let table = document.getElementById('table');
 let oldTableBody = document.getElementById('tbody');
 let newTableBody = document.createElement('tbody');
@@ -15,6 +17,12 @@ logoutbtn.addEventListener('click', logout);
 let refreshbtn = document.getElementById('refreshbtn');
 refreshbtn.addEventListener('click', refresh);
 
+let a1 = document.getElementById('link1');
+let a2 = document.getElementById('link2');
+
+a1.href = `${url}MyReimbursement.html`;
+a2.href = `${url}Reimbursements.html`;
+
 refresh();
 
 async function submitReimbursement() {
@@ -24,7 +32,7 @@ async function submitReimbursement() {
     typeId: document.getElementById('type').value,
   };
 
-  let response = await fetch(url, {
+  let response = await fetch(`${url}reimbursements/add`, {
     method: 'POST',
     body: JSON.stringify(Reimbursement),
     credentials: 'include',
@@ -38,25 +46,26 @@ async function submitReimbursement() {
   }
 }
 
-
 async function logout() {
-  let url = 'http://localhost:7000/logout';
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}logout`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     console.log('logged out');
-    window.location.href = 'http://localhost:7000/';
+    window.location.href = url;
   } else {
     console.log('was not logged in');
-    window.location.href = 'http://localhost:7000/';
+    window.location.href = url;
   }
 }
 
 async function refresh() {
-  let url = 'http://localhost:7000/reimbursements/myreimbursements';
-
-  let response = await fetch(url, { method: 'GET', credentials: 'include' });
+  let response = await fetch(`${url}reimbursements/myreimbursements`, {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (response.status === 200) {
     let data = await response.json();

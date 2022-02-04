@@ -1,8 +1,12 @@
+let url2 = 'http://3.23.112.168:7000/';
+let url = 'http://localhost:7000/';
+
 //Login btn
 let loginbtn = document.getElementById('loginbtn');
 loginbtn.addEventListener('click', login);
-let url = 'http://3.23.112.168:7000/';
-let url2 = 'http://localhost:7000/';
+
+let registerlink = document.getElementById('registerlink');
+registerlink.href = `${url}Register.html`;
 
 async function login() {
   let usernameEl = document.getElementById('username');
