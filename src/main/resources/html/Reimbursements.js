@@ -8,7 +8,7 @@ newTableBody.id = 'tbody';
 
 //Get All btn
 let btn = document.getElementById('btn');
-btn.addEventListener('click', fetchFunc);
+btn.addEventListener('click', getAll);
 
 //Status dropdown selector
 let statusEl = document.getElementById('status');
@@ -33,7 +33,26 @@ let a2 = document.getElementById('link2');
 a1.href = `${url}MyReimbursement.html`;
 a2.href = `${url}Reimbursements.html`;
 
-async function fetchFunc() {
+let last = 'status';
+
+async function refresh(last) {
+  switch (last) {
+    case 'status':
+      getByStatus();
+      break;
+    case 'all':
+      getAll();
+      break;
+    case 'author':
+      getByAuthor();
+      break;
+    case 'resolver':
+      getByResolver();
+      break;
+  }
+}
+
+async function getAll() {
   //get the new references everybutton press
   oldTableBody = document.getElementById('tbody');
 
@@ -52,6 +71,7 @@ async function fetchFunc() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+    last = 'all';
   } else if (response.status === 403) {
     notManager();
   } else {
@@ -78,6 +98,7 @@ async function getByStatus() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+    last = 'status';
   } else if (response.status === 403) {
     notManager();
   } else {
@@ -104,6 +125,7 @@ async function getByAuthor() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+    last = 'author';
   } else if (response.status === 204) {
     empty();
   } else if (response.status === 403) {
@@ -132,6 +154,7 @@ async function getByResolver() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+    last = 'resolver';
   } else if (response.status === 204) {
     empty();
   } else if (response.status === 403) {
@@ -301,6 +324,7 @@ function renderData(data) {
         });
         if (response.status === 202) {
           console.log('Approved element');
+          refresh(last);
         } else {
           console.log('approve failed');
         }
@@ -313,6 +337,7 @@ function renderData(data) {
         });
         if (response.status === 202) {
           console.log('Deny element');
+          refresh(last);
         } else {
           console.log('Deny failed');
         }
@@ -329,6 +354,7 @@ function renderData(data) {
       });
       if (response.status === 202) {
         console.log('deleted element');
+        refresh(last);
       } else {
         console.log('delete failed');
       }
