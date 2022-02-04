@@ -41,6 +41,8 @@ async function fetchFunc() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+  } else if (response.status === 403) {
+    notManager();
   } else {
     console.log('Something went wrong');
   }
@@ -64,6 +66,8 @@ async function getByStatus() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+  } else if (response.status === 403) {
+    notManager();
   } else {
     console.log('Something went wrong');
   }
@@ -89,6 +93,8 @@ async function getByAuthor() {
     renderData(data);
   } else if (response.status === 204) {
     empty();
+  } else if (response.status === 403) {
+    notManager();
   } else {
     console.log('Something went wrong');
   }
@@ -114,6 +120,8 @@ async function getByResolver() {
     renderData(data);
   } else if (response.status === 204) {
     empty();
+  } else if (response.status === 403) {
+    notManager();
   } else {
     console.log('Something went wrong');
   }
@@ -129,6 +137,21 @@ async function empty() {
 
   let emptyText = document.createElement('p');
   emptyText.innerText = "There doesn't seem to be anything here for that...";
+  newTableBody.appendChild(emptyText);
+
+  oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
+}
+
+async function notManager() {
+  //get the new references everybutton press
+  oldTableBody = document.getElementById('tbody');
+
+  //create a new <tbody> element and set id="tbody"
+  newTableBody = document.createElement('tbody');
+  newTableBody.id = 'tbody';
+
+  let emptyText = document.createElement('p');
+  emptyText.innerText = "Hey are you sure you're suppose to be here...";
   newTableBody.appendChild(emptyText);
 
   oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
@@ -152,6 +175,8 @@ async function getPending() {
     let data = await response.json();
     console.log(data);
     renderData(data);
+  } else if (response.status === 403) {
+    notManager();
   } else {
     console.log('Something went wrong');
   }
