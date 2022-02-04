@@ -21,7 +21,12 @@ public class App {
         log.info("Application Starting");
 
         javalinApp = Javalin.create(config -> {
-            config.addStaticFiles("./src/main/resources/html", Location.EXTERNAL);
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/";
+                staticFiles.directory = "./src/main/resources/html";
+                staticFiles.location = Location.EXTERNAL;
+            });
+
             config.accessManager((handler, ctx, routeRoles) -> {
 
 
